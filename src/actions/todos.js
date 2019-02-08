@@ -18,3 +18,11 @@ export const loadTodos = () => (dispatch, getState) => {
     })
     .catch(console.error);
 };
+
+export const loadProjectTodos = id => dispatch => {
+  request(`${baseUrl}/projects/${id}`)
+    .then(response => {
+      dispatch(todosFetched(response.body.todos));
+    })
+    .catch(console.error);
+};

@@ -3,20 +3,23 @@ import { connect } from 'react-redux';
 
 import ProjectDetails from './ProjectDetails';
 import { loadProject } from '../actions/projects';
-import { loadTodos } from '../actions/todos';
+import { loadProjectTodos } from '../actions/todos';
 
 class ProjectDetailsContainer extends React.Component {
   componentDidMount() {
-    this.props.loadProject(Number(this.props.match.params.id));
-    this.props.loadTodos();
+    const id = Number(this.props.match.params.id);
+    this.props.loadProject(id);
+    this.props.loadProjectTodos(id);
   }
 
   render() {
     if (
       !this.props.project ||
+      !this.props.todos ||
       this.props.project.id !== Number(this.props.match.params.id)
     )
       return 'Loading';
+
     return (
       <ProjectDetails project={this.props.project} todos={this.props.todos} />
     );
@@ -30,5 +33,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadProject, loadTodos }
+  { loadProject, loadProjectTodos }
 )(ProjectDetailsContainer);
