@@ -1,6 +1,11 @@
 import { combineReducers } from 'redux';
+
+import project from './project';
 import projects from './projects';
+import todos from './todos';
 
 export default combineReducers({
-  projects
+  project,
+  projects,
+  todos
 });
